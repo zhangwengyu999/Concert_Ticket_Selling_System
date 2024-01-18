@@ -1,0 +1,128 @@
+<!-- LIU Minghao, ZHANG Wengyu -->
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Event Dashboard | Concert Ticket Selling System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="./scripts/jquery-3.7.1.min.js"></script>
+    <script src="./scripts/events.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-light" style="background:rgb(255,255,255);box-shadow:0px 0px 2px 2px var(--bs-navbar-disabled-color);">
+        <div class="container-fluid mx-lg-5 my-2"><a class="navbar-brand ms-lg-5" href="./" style="font-weight:bold;"> Concert Ticket Selling System </a><button data-bs-toggle="collapse" data-bs-target="#navbarScroll" class="navbar-toggler" type="button" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarScroll">
+                <ul class="navbar-nav me-auto my-2 my-lg-0" style="--bs-scroll-height:100px;">
+                    <li class="nav-item"><a class="nav-link ms-lg-5" aria-current="page" href="./index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link link-primary fw-bold " href="./events.html">Events</a></li>
+                    <li class="nav-item d-none dropdown"><a class="nav-link dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" href="#" role="button"> Link </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"></li>
+                </ul>
+                <form class="d-flex me-lg-3 d-none" role="search"><input class="form-control me-2" type="search" aria-label="Search" placeholder="Search"><button class="btn btn-outline-primary" type="submit">Search</button></form>
+                <form class="d-flex mx-lg-5 mt-3 mt-lg-0" role="login" action="./account-page.html"><button class="btn btn-primary" type="submit" id="loginButton">Account</button></form>            </div>
+        </div>
+    </nav>
+
+
+    <div class="container py-4">
+        <header class="text-center mb-4">
+            <h1>Event Dashboard</h1>
+        </header>
+        <form id="order-form">
+            <div class="mb-3">
+                <label for="titleInput" class="form-label"><b>Search on Title:</b></label>
+                <input type="text" class="form-control" id="titleInput" name="titleInput" autocomplete="off" placeholder="Enter Event Title to Search">
+                <div id="titleSuggestions" class="list-group"></div>
+            </div>
+
+            <div class="mb-3">
+                <p class="form-label"><b>Filter on Fields:</b></p>
+            </div>
+
+            <div class="mb-3">
+                <label for="titleSelection" class="form-label">Title:</label>
+                <select class="form-select" id="titleSelection" name="titleSelection">
+                </select>
+            </div>
+
+            <div class="mb-3 pt-1">
+                <label for="venueSelection" class="form-label">Venue:</label>
+                <select class="form-select" id="venueSelection" name="venueSelection">
+
+                </select>
+            </div>
+            <div class="mb-3 pt-1">
+                <label for="datetimeSelection" class="form-label">Date/Time:</label>
+                <select class="form-select" id="datetimeSelection" name="datetimeSelection">
+
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="descriptionInput" class="form-label">Description:</label>
+            
+                <input class="form-control" id="descriptionInput" name="descriptionInput" rows="3"></input>
+            </div>
+
+
+            <div class="">
+                <button type="button" class="btn btn-success mr-2" id="searchButton">Apply</button>
+                <button type="reset" class="btn btn-warning mr-2" id="searchReset">Reset</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="container mb-5">
+        <div class="container" id="events-list-container">
+            <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 justify-content-center mt-4" id="events-list">
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="container mb-5">
+        <div class="container" id="events-list-container">
+            <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 justify-content-center mt-4" id="events-list">
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+</body>
+<footer class="footer fixed-bottom bg-light text-white text-center py-4">
+    <div class="container text-muted py-3 py-lg-3">
+        <p class="mb-0">LIU Minghao, ZHANG Wengyu, EIE4432</p>
+      <span id="time"></span>
+    </div>
+</footer>
+    <script>
+    function displayTime() {
+        let now = new Date();
+        let formattedTime = now.toLocaleString('en-US', {
+            month: '2-digit',
+            day: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true
+        });
+        document.getElementById('time').innerText = formattedTime;
+    }
+    displayTime();
+  </script>
+
+</html>

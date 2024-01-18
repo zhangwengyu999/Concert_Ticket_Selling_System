@@ -1,0 +1,273 @@
+<!-- LIU Minghao, ZHANG Wengyu -->
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Event Management (Admin) | Concert Ticket Selling System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="./scripts/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./scripts/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css">
+    <script src="./scripts/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="./scripts/event-management.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-light" style="background:rgb(255,255,255);box-shadow:0px 0px 2px 2px var(--bs-navbar-disabled-color);">
+        <div class="container-fluid mx-lg-5 my-2"><a class="navbar-brand ms-lg-5" href="./" style="font-weight:bold;"> Concert Ticket Selling System </a><button data-bs-toggle="collapse" data-bs-target="#navbarScroll" class="navbar-toggler" type="button" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarScroll">
+                <ul class="navbar-nav me-auto my-2 my-lg-0" style="--bs-scroll-height:100px;">
+                    <li class="nav-item"><a class="nav-link ms-lg-5" aria-current="page" href="./index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./events.html">Events</a></li>
+                    <li class="nav-item d-none dropdown"><a class="nav-link dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" href="#" role="button"> Link </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"></li>
+                </ul>
+                <form class="d-flex me-lg-3 d-none" role="search"><input class="form-control me-2" type="search" aria-label="Search" placeholder="Search"><button class="btn btn-outline-primary" type="submit">Search</button></form>
+                <form class="d-flex mx-lg-5 mt-3 mt-lg-0" role="login" action="./account-page.html"><button class="btn btn-primary" type="submit" id="loginButton">Account</button></form>            </div>
+        </div>
+    </nav>
+
+    <div class="container py-4">            
+        <header class="text-center mb-4">
+            <h1>Event Management</h1>
+        </header>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="new-tab" data-bs-toggle="tab" data-bs-target="#new-tab-pane" type="button" role="tab" aria-controls="new-tab-pane" aria-selected="true">New</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="filter-tab" data-bs-toggle="tab" data-bs-target="#filter-tab-pane" type="button" role="tab" aria-controls="filter-tab-pane" aria-selected="false">Filter</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="modify-tab" data-bs-toggle="tab" data-bs-target="#modify-tab-pane" type="button" role="tab" aria-controls="modify-tab-pane" aria-selected="false">Modify</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="transaction-tab" data-bs-toggle="tab" data-bs-target="#transaction-tab-pane" type="button" role="tab" aria-controls="transaction-tab-pane" aria-selected="false">Transactions</button>
+            </li>
+
+          </ul>
+
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="new-tab-pane" role="tabpanel" aria-labelledby="new-tab" tabindex="0">
+                <form id="order-form" method="POST">
+                    <div class="mb-3 mt-3">
+                        <label for="uploadPictureInput" class="form-label">Cover Image:</label>
+                        <input type="file" class="form-control" id="uploadPictureInput" name="image">
+                        <img id="previewImage" src="#" alt="Image preview" class="picture-src justify-content-end w-50"  style="max-width: 100%; height: auto; display: none;"/>
+                    </div>
+
+                    <div class="mb-3 mt-3">
+                        <label for="idInput" class="form-label">Event ID:</label>
+                        <input type="text" class="form-control" id="idInput" name="idInput">
+                    </div>
+                                        
+                    <div class="mb-3 mt-3">
+                        <label for="titleInput" class="form-label">Title:</label>
+                        <input type="text" class="form-control" id="titleInput" name="titleInput">
+                    </div>
+                    <div class="mb-3 mt-3">
+                        <label for="dateInput" class="form-label">Date/Time:</label>
+                        <input type="text" class="form-control" id="dateInput" name="dateInput">
+                    </div>
+
+                    <div class="mb-3 mt-3">
+                        <label for="venueSelection" class="form-label">Venue:</label>
+                        <select class="form-select" id="venueSelection" name="venueSelection"> 
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3 mt-3">
+                        <label for="descInput" class="form-label">Description:</label>
+                        <textarea type="text" class="form-control" id="descInput" name="NameInput"></textarea>
+                    </div>
+
+                    <div class="mb-3 mt-3">
+                        <label for="firstClassPriceInput" class="form-label">First Class Price:</label>
+                        <input type="number" class="form-control" id="firstClassPriceInput" name="firstClassPriceInput">
+                    </div>
+
+                    <div class="mb-3 mt-3">
+                        <label for="secondClassPriceInput" class="form-label">Second Class Price:</label>
+                        <input type="number" class="form-control" id="secondClassPriceInput" name="secondClassPriceInput">
+                    </div>
+
+                    <div class="">
+                        <button id="addEventButton" type="button" class="btn btn-success mr-2">Add</button>
+                        <button type="reset" class="btn btn-warning mr-2" onclick="reset()">Reset</button>
+                    </div>
+                </form>
+                <br>
+                <br>
+            </div>
+            <div class="tab-pane fade" id="filter-tab-pane" role="tabpanel" aria-labelledby="filter-tab" tabindex="0">
+                <form id="order-form" method="POST">
+                    <div class="mb-3">
+                        <label for="titleSelectionFilter" class="form-label">Title:</label>
+                        <select class="form-select" id="titleSelectionFilter" name="titleSelectionFilter">
+                        </select>
+                    </div>
+
+                    <div class="mb-3 pt-1">
+                        <label for="venueSelectionFilter" class="form-label">Venue:</label>
+                        <select class="form-select" id="venueSelectionFilter" name="venueSelectionFilter">
+
+                        </select>
+                    </div>
+                    <div class="mb-3 pt-1">
+                        <label for="datetimeSelectionFilter" class="form-label">Date/Time:</label>
+                        <select class="form-select" id="datetimeSelectionFilter" name="datetimeSelectionFilter">
+
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="descriptionInpuFiltert" class="form-label">Description:</label>
+                    
+                        <textarea class="form-control" id="descriptionInputFilter" name="descriptionInputFilter" rows="3"></textarea>
+                    </div>
+
+
+                    <div class="">
+                        <button type="button" class="btn btn-success mr-2" id="searchButton">Search</button>
+                        <button type="reset" class="btn btn-warning mr-2" id="searchReset">Reset</button>
+                    </div>
+                </form>
+
+                <div class="container mb-5">
+                    <div class="container" id="events-list-container">
+                        <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 justify-content-center mt-4" id="events-list">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="modify-tab-pane" role="tabpanel" aria-labelledby="modify-tab" tabindex="0">
+                <form id="order-form" method="POST">
+                    <div class="mb-3 mt-3 message">
+                        <div class="alert alert-success" id="seatMessage"> Please first select a event to modify. </div>
+                    </div>
+                    <div class="mb-3 mt-3">
+                        <label for="titleSelectModify" class="form-label">Select Event:</label>
+                        <select class="form-select" class="form-control" id="titleSelectModify" name="titleInput">
+                        </select>
+                    </div>
+
+                    <div class="mb-3 mt-3">
+                        <label for="titleInputModify" class="form-label">Event Title:</label>
+                        <input type="text" class="form-control" id="titleInputModify" name="titleInputModify">
+                    </div>
+
+                    <div class="mb-3 mt-3">
+                        <label for="uploadPictureInputModify" class="form-label">Cover Image:</label>
+                        <img id="oldImage" src="#" alt="Image preview" style="max-width: 100%; height: auto; display: none;"/>
+                        <input type="file" class="form-control" id="uploadPictureInputModify" name="image">
+                        <img id="previewImageModify" src="#" alt="Image preview" class="picture-src justify-content-end w-50" style="max-width: 100%; height: auto; display: none;"/>
+                    </div>
+
+                    <div class="mb-3 mt-3">
+                        <label for="idInputModify" class="form-label">Event ID:</label>
+                        <input type="text" class="form-control" id="idInputModify" name="idInput" readonly disabled>
+                    </div>
+                                        
+                    <div class="mb-3 mt-3">
+                        <label for="dateInputModify" class="form-label">Date/Time:</label>
+                        <input type="text" class="form-control" id="dateInputModify" name="dateInput">
+                    </div>
+
+                    <div class="mb-3 mt-3">
+                        <label for="venueSelectionModify" class="form-label">Venue:</label>
+                        <select class="form-select" id="venueSelectionModify" name="venueSelection"> 
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3 mt-3">
+                        <label for="descInputModify" class="form-label">Description:</label>
+                        <textarea type="text" class="form-control" id="descInputModify" name="NameInput"></textarea>
+                    </div>
+
+                    <div class="mb-3 mt-3">
+                        <label for="firstClassPriceInputModify" class="form-label">First Class Price:</label>
+                        <input type="number" class="form-control" id="firstClassPriceInputModify" name="firstClassPriceInput">
+                    </div>
+
+                    <div class="mb-3 mt-3">
+                        <label for="secondClassPriceInputModify" class="form-label">Second Class Price:</label>
+                        <input type="number" class="form-control" id="secondClassPriceInputModify" name="secondClassPriceInput">
+                    </div>
+
+                    <div class="mb-3 mt-3">
+                        <label for="statusSelectModify" class="form-label">Status:</label>
+                        <select class="form-select" class="form-control" id="statusSelectModify" name="statusSelectModify">
+                            <option value="1">Running</option>
+                            <option value="0">Cancelled</option>
+                        </select>
+                    </div>
+
+                    <div class="">
+                        <button id="modifyEventButton" type="button" class="btn btn-success mr-2">Modify</button>
+                    </div>
+                </form>
+                <br>
+                <br>
+            </div>
+            <div class="tab-pane fade" id="transaction-tab-pane" role="tabpanel" aria-labelledby="transaction-tab" tabindex="0">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">User ID</th>
+                        <th scope="col">Event Title</th>
+                        <th scope="col">Venue</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Seat</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Transaction Time</th>
+                      </tr>
+                    </thead>
+                    <tbody id="transaction-table">
+
+                    </tbody>                
+                </table>
+                <br>
+                <br>
+            </div>
+          </div>
+
+    </div>
+
+    <br>
+    <br>
+    <br>
+</body>
+<footer class="footer fixed-bottom bg-light text-white text-center py-4">
+    <div class="container text-muted py-3 py-lg-3">
+        <p class="mb-0">LIU Minghao, ZHANG Wengyu, EIE4432</p>
+      <span id="time"></span>
+    </div>
+</footer>
+    <script>
+    function displayTime() {
+        let now = new Date();
+        let formattedTime = now.toLocaleString('en-US', {
+            month: '2-digit',
+            day: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true
+        });
+        document.getElementById('time').innerText = formattedTime;
+    }
+    displayTime();
+  </script>
+
+</html>
