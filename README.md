@@ -57,7 +57,7 @@ JavaScript |
 ## 3. Website Structure
 
 <center>
-<img src="./img/Website_Structure.svg" width="90%">
+<img src="./img/Website_Structure.png" width="90%">
 </center>
 
 ---
@@ -65,7 +65,7 @@ JavaScript |
 ## 4. Use Case Diagram
 
 <center>
-<img src="./img/Use_Case.svg" width="90%">
+<img src="./img/Use_Case.png" width="90%">
 </center>
 
 ---
